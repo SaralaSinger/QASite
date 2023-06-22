@@ -37,15 +37,6 @@ namespace QandASite.Data
                     .Include(q => q.User)
                     .FirstOrDefault(q => q.Id == id);
         }
-        public List<Question> GetQuestionsForTag(string name)
-        {
-            using var ctx = new QandADbContext(_connectionString);
-            return ctx.Questions
-                    .Where(c => c.QuestionsTags.Any(t => t.Tag.Name == name))
-                    .Include(q => q.QuestionsTags)
-                    .ThenInclude(qt => qt.Tag)
-                    .ToList();
-        }
         public List<Question> GetAllQuestions()
         {
             using var ctx = new QandADbContext(_connectionString);
